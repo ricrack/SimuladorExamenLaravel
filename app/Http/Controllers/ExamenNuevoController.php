@@ -9,23 +9,18 @@ use App\Models\Examen;
 class ExamenNuevoController extends Controller
 {
 
-    public function values()
+    public function index()
     {
-
-        $examen = Examen::all();
-
-
-
-        return view('docente.nuevoExamen', compact('examen'));
+        return view('registroExamen');
     }
 
-    public function create()
+    public function seccionRegistrar()
     {
 
-        return view('docente.registrarExamen');
+        return view('registroExamen');
     }
 
-    public function store(Request $request)
+    public function registrar(Request $request)
     {
 
         $examen = new Examen();
@@ -56,11 +51,27 @@ class ExamenNuevoController extends Controller
         return redirect()->route('docente.index');
     }
 
-
-    public function destroy($id)
+    public function destroyExam($id)
     {
         $examen = Examen::find($id);
         $examen->delete();
+
+        return redirect()->route('docente.index');
+    }
+
+    public function seccionEditar($id)
+    {
+
+        $examen = Examen::find($id);
+
+        return view('editarExamen', compact('examen'));
+    }
+
+    public function editar(Request $request, $id)
+    {
+        $examen = Examen::find($id);
+
+        $examen->update($request->all());
 
         return redirect()->route('docente.index');
     }

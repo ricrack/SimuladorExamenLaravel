@@ -15,7 +15,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.16/tailwind.min.css
 
 
     @yield('barra')
-  
+
+    @yield('bienvenida')
+
+    <ul class="mt-5 px-5 ml-auto flex justify-end pt-1">
+        @yield('boton')
+      </ul>  
+
+      @yield('titulo')
       @yield('content')
 
 </body>

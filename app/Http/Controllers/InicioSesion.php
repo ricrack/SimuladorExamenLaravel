@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Examen;
+
 
 class InicioSesion extends Controller
 {
@@ -23,12 +25,13 @@ class InicioSesion extends Controller
     {
         if (auth()->attempt(request(['user', 'password'])) == false) {
             return back()->withErrors([
-                'message' => 'El email o la contraseña son incorrectos. Intenta de nuevo'
+                'message' => 'El usuario o la contraseña son incorrectos. Intenta de nuevo'
             ]);
         } else {
             if (auth()->user()->typeUser == 'Docente' || auth()->user()->typeUser == 'docente') {
                 return redirect()->to('/docente');
             } else {
+
                 return redirect()->to('/alumno');
             }
         }
@@ -54,5 +57,27 @@ class InicioSesion extends Controller
     {
         auth()->logout();
         return redirect()->to('/');
+    }
+
+    public function values()
+    {
+
+
+        $examen = Examen::all();
+
+
+
+        return view('sesionDocente', compact('examen'));
+    }
+
+    public function valuesAlumno()
+    {
+
+
+        $examen = Examen::all();
+
+
+
+        return view('sesionAlumno', compact('examen'));
     }
 }

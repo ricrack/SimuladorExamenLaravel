@@ -9,7 +9,9 @@ class Examen extends Model
 {
     use HasFactory;
 
-    protected $fillLable = [
+    protected $table = 'examens';
+
+    protected $fillable = [
         'maestro',
         'materia',
         'pregunta1',
